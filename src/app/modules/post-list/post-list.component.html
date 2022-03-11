@@ -1,0 +1,39 @@
+<div class="main-div">
+    <h3 class="text-center">All Post</h3>
+    <p *ngIf="isDataFetching; else showTable">Loading...</p>
+    <ng-template #showTable>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                <th>No.</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of showPost;">
+                    <td>{{item.srno}}</td>
+                    <td>{{item.title}}</td>
+                    <td [innerText]="item.body"></td>
+                    <td>
+                        <div class="action-btn">
+                            <fa-icon class="font-icon" [icon]="faEdit" [routerLink]="['/app/post/detail', item.id]"></fa-icon>
+                            <fa-icon class="font-icon" [icon]="faTrash" (click)="deletePost(item.id)"></fa-icon>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-between p-2">
+            <ngb-pagination [collectionSize]="post?.length" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshPage()">
+            </ngb-pagination>
+          
+            <select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshPage()">
+              <option [ngValue]="5">5</option>
+              <option [ngValue]="10">10</option>
+              <option [ngValue]="20">20</option>
+            </select>
+          </div>
+    </ng-template>
+</div>

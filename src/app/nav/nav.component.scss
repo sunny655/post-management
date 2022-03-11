@@ -1,0 +1,10 @@
+::ng-deep app-nav{
+    .navbar{
+        background-color: #8080809c;
+        a{
+            &.navbar-brand{
+                color: unset;
+            }
+        }
+    }
+}

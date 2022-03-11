@@ -1,0 +1,16 @@
+::ng-deep app-post-list{
+    .main-div{
+        table{
+            tbody{
+                tr{
+                    td{
+                        .action-btn{
+                            display: flex;
+                            flex-wrap: nowrap;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

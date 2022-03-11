@@ -1,0 +1,35 @@
+<div class="main-detail-cls">
+    <fa-icon [icon]="faHome" class="font-icon" (click)="router.navigate(['app/post/list'])"></fa-icon>
+    <div class="edit-icon">
+        <fa-icon [icon]="faEdit" (click)="isEdit = !isEdit;" *ngIf="!isEdit; else saveBtn"></fa-icon>
+        <ng-template #saveBtn>
+            <button class="btn btn-primary" (click)="isEdit = !isEdit;">Save</button>        
+            <button class="btn" (click)="isEdit = !isEdit;">Cancel</button>        
+        </ng-template>
+    </div>
+    <div class="main-post">
+        <ng-container *ngIf="!isEdit; else editable">            
+            <h4>{{postData?.title}}</h4>
+            <p [innerText]="postData?.body"></p>
+        </ng-container>
+        <ng-template #editable>
+            <div class="edit-post">
+                <input type="text" [(ngModel)]="postData.title">
+                <textarea [(ngModel)]="postData.body" rows="5"></textarea>
+            </div>
+        </ng-template>
+    </div>
+    <div class="comment-box mb-2 ml-3" *ngFor="let item of comments">
+        <div class="comment-header">
+            <div class="icon">
+                <fa-icon [icon]="faUser" size="1x"></fa-icon>
+            </div>
+            <div class="detail">
+                <h6 class="mb-0 pt-3">{{item.name}}</h6>
+                <p>{{item.email}}</p>
+            </div>
+        </div>
+        <div class="comment-body" [innerText]="item.body" appEllipsis>
+        </div>
+    </div>
+</div>
